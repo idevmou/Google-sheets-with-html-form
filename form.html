@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- form -->
+    <h1 id="id"></h1>
+    <form action="https://script.google.com/macros/s/AKfycbxkMp6z7RUWp7m7h6dHAk8cANpe7HRYH7DTmuypC5f687xljIaHvfSOBVD4Wt0x4r2Z/exec" method="post">
+        <input type="text" name="name" placeholder="Name"><br>
+        <input type="email" name="email" placeholder="Email"><br>
+        <input type="tel" name="phone" placeholder="Phone"><br>
+        <input type="file" name="upload" placeholder="File"><br>
+        <input type="submit" id="sub">
+    </form>
+    <script>
+        let form = document.querySelector("form");
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.querySelector("#sub").value = "Submited";
+            
+            let data = new FormData(form);
+            fetch('https://script.google.com/macros/s/AKfycbz9_rQb3UOtsOa38CABg8FhR8jrD1UT5RGc5JZVvDQdbcGpstGYX5TS9gp-xOaxttNY/exec', {
+                    method: "POST",
+                    body: data
+                })
+                .then(res => res.text())
+                .then(data => {
+                    document.querySelector("#msg").innerHTML = data;
+                    document.querySelector("#sub").value = "Submit"
+                    document.location.reload(true);
+
+                });
+        })
+    </script>
+</body>
+</html>
